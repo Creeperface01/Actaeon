@@ -1,0 +1,62 @@
+package me.onebone.actaeon.hook;
+
+import me.onebone.actaeon.entity.animal.Animal;
+
+/**
+ * AttackPanicRunHook
+ * ===============
+ * author: PikyCZ
+ * ===============
+ */
+public class AttackPanicRunHook extends MovingEntityHook {
+    
+    protected double speed;
+    private double randPosX;
+    private double randPosY;
+    private double randPosZ;
+    
+    public AttackPanicRunHook(Animal entity) {
+        super(entity);
+    }
+    
+    /*@Override
+    public boolean shouldExecute() {
+        if (!this.executing) {
+            
+        }
+        
+        if (!this.theEntityCreature.isAlive()) {
+            Vector3 vec3d = (this.theEntityCreature, 5, 4);
+
+            if (vec3d == null)
+            {
+                return false;
+            }
+            else
+            {
+                this.randPosX = vec3d.x;
+                this.randPosY = vec3d.y;
+                this.randPosZ = vec3d.z;
+                return true;
+            }
+        }
+        else
+        {
+            Position blockpos = this.getRandPos(this.theEntityCreature.worldObj, this.theEntityCreature, 5, 4);
+
+            if (blockpos == null)
+            {
+                return false;
+            }
+            else
+            {
+                this.randPosX = (double)blockpos.getX();
+                this.randPosY = (double)blockpos.getY();
+                this.randPosZ = (double)blockpos.getZ();
+                return true;
+            }
+        }
+        
+    }*/
+    
+}
