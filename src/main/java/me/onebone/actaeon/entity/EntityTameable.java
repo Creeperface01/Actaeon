@@ -108,7 +108,7 @@ public abstract class EntityTameable extends Animal implements EntityOwnable {
     protected void addTameParticle(boolean success) {
         Particle particle = success ? new HeartParticle(this) : new SmokeParticle(this);
 
-        Random rand = this.level.rand;
+        Random rand = new Random();
         for (int i = 0; i < 7; ++i) {
 
             this.level.addParticle((Particle) particle.setComponents(this.x + (rand.nextFloat() * this.getWidth() * 2) - this.getWidth(), this.y + 0.5 + (rand.nextFloat() * this.getHeight()), this.z + (rand.nextFloat() * this.getWidth() * 2) - this.getWidth()));

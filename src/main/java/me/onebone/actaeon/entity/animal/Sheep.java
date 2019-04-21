@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Sheep extends Animal {
 
@@ -135,12 +136,13 @@ public class Sheep extends Animal {
 
             this.setSheared(true);
 
-            int count = 1 + this.level.rand.nextInt(3);
+            Random rand = new Random();
+            int count = 1 + rand.nextInt(3);
             while (count-- > 0) {
                 this.level.dropItem(this.add(0, 1), Item.get(Item.WOOL, getColor().getWoolData()), new Vector3(
-                        (this.level.rand.nextFloat() - this.level.rand.nextFloat()) * 0.1,
-                        this.level.rand.nextFloat() * 0.05,
-                        (this.level.rand.nextFloat() - this.level.rand.nextFloat()) * 0.1
+                        (rand.nextFloat() - rand.nextFloat()) * 0.1,
+                        rand.nextFloat() * 0.05,
+                        (rand.nextFloat() - rand.nextFloat()) * 0.1
                 ));
             }
 
@@ -181,7 +183,7 @@ public class Sheep extends Animal {
     private DyeColor getColorFromParents(Sheep father, Sheep mother) {
         List<DyeColor> colors = Arrays.asList(father.getColor(), mother.getColor());
 
-        for (Recipe recipe : getServer().getCraftingManager().recipes.values()) {
+        for (Recipe recipe : getServer().getCraftingManager().getRecipes()) {
             if (!(recipe instanceof ShapelessRecipe)) {
                 continue;
             }
@@ -192,11 +194,9 @@ public class Sheep extends Animal {
             if (ingredients.size() != 2) {
                 continue;
             }
-
-
         }
-
-        if (this.level.rand.nextBoolean()) {
+        Random rand = new Random();
+        if (rand.nextBoolean()) {
             return father.getColor();
         } else {
             return mother.getColor();

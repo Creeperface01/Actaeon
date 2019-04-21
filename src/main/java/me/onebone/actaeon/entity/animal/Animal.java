@@ -7,6 +7,7 @@ import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.particle.HeartParticle;
+import cn.nukkit.math.SimpleAxisAlignedBB;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.network.protocol.AddEntityPacket;
@@ -39,7 +40,7 @@ abstract public class Animal extends EntityAgeable {
             --this.inLoveTicks;
 
             if (this.inLoveTicks % 10 == 0) {
-                Random rand = this.level.rand;
+                Random rand = new Random();
 
                 this.level.addParticle(new HeartParticle(new Vector3(this.x + (rand.nextFloat() * this.getWidth() * 2) - getWidth(), this.y + 0.5 + (rand.nextFloat() * getHeight()), this.z + (rand.nextFloat() * getWidth() * 2) - this.getWidth())));
             }

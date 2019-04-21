@@ -3,9 +3,12 @@ package me.onebone.actaeon.hook;
 import cn.nukkit.Server;
 import cn.nukkit.block.*;
 import cn.nukkit.event.entity.EntityBlockChangeEvent;
+import cn.nukkit.level.GameRule;
 import cn.nukkit.level.particle.DestroyBlockParticle;
 import cn.nukkit.network.protocol.EntityEventPacket;
 import me.onebone.actaeon.entity.animal.Animal;
+
+import java.util.Random;
 
 /**
  * Created by CreeperFace on 15.7.2017.
@@ -23,7 +26,8 @@ public class EatGrassHook extends MovingEntityHook {
 
     @Override
     public boolean shouldExecute() {
-        if (!this.animal.onGround || this.animal.level.rand.nextInt(this.animal.isBaby() ? 50 : 100) != 0) {
+        Random rand = new Random();
+        if (!this.animal.onGround || rand.nextInt(this.animal.isBaby() ? 50 : 100) != 0) {
             return false;
         } else {
             Block block = this.entity.getLevelBlock();
@@ -64,7 +68,7 @@ public class EatGrassHook extends MovingEntityHook {
             Block block = this.entity.floor().getLevelBlock();
 
             if (block instanceof BlockTallGrass) {
-                if (this.entity.level.getGameRules().getBoolean("mobGriefing")) {
+                if (this.entity.level.getGameRules().getBoolean(GameRule.MOB_GRIEFING)) {
                     EntityBlockChangeEvent e = new EntityBlockChangeEvent(this.entity, block, new BlockAir());
                     this.entity.getServer().getPluginManager().callEvent(e);
 
@@ -78,7 +82,7 @@ public class EatGrassHook extends MovingEntityHook {
                 block = block.down();
 
                 if (block.getId() == Block.GRASS) {
-                    if (this.entity.level.getGameRules().getBoolean("mobGriefing")) {
+                    if (this.entity.level.getGameRules().getBoolean(GameRule.MOB_GRIEFING)) {
 
                         EntityBlockChangeEvent e = new EntityBlockChangeEvent(this.entity, block, new BlockDirt());
                         this.entity.getServer().getPluginManager().callEvent(e);
