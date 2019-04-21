@@ -4,6 +4,8 @@ import cn.nukkit.entity.Entity;
 import me.onebone.actaeon.entity.MovingEntity;
 import me.onebone.actaeon.util.Utils;
 
+import java.util.Random;
+
 /**
  * @author CreeperFace
  */
@@ -16,6 +18,8 @@ public class WatchClosestHook extends MovingEntityHook {
     private Entity closeEntity;
 
     private int time;
+
+    private Random rand = new Random();
 
     public WatchClosestHook(MovingEntity entity, Class<? extends Entity> watching, double maxDistance) {
         this(entity, watching, maxDistance, 0.2f);
@@ -33,7 +37,7 @@ public class WatchClosestHook extends MovingEntityHook {
 
     @Override
     public boolean shouldExecute() {
-        if (this.entity.level.rand.nextFloat() >= this.chance) {
+        if (rand.nextFloat() >= this.chance) {
             return false;
         }
 
@@ -56,7 +60,7 @@ public class WatchClosestHook extends MovingEntityHook {
 
     @Override
     public void startExecuting() {
-        this.time = this.entity.level.rand.nextInt(40) + 40;
+        this.time = rand.nextInt(40) + 40;
     }
 
     @Override

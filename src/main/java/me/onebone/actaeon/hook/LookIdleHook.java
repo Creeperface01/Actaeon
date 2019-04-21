@@ -14,6 +14,8 @@ public class LookIdleHook extends MovingEntityHook {
 
     private double time;
 
+    private Random rand = new Random();
+
     public LookIdleHook(MovingEntity entity) {
         super(entity);
 
@@ -29,7 +31,7 @@ public class LookIdleHook extends MovingEntityHook {
 
     @Override
     public boolean shouldExecute() {
-        return this.entity.level.rand.nextFloat() < 0.02;
+        return rand.nextFloat() < 0.02;
     }
 
     @Override
@@ -39,7 +41,7 @@ public class LookIdleHook extends MovingEntityHook {
 
     @Override
     public void startExecuting() {
-        Random random = this.entity.level.rand;
+        Random random = rand;
 
         double rng = (Math.PI * 2) * random.nextDouble();
         this.x = Math.cos(rng);

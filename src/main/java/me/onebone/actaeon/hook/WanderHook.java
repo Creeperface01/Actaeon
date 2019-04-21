@@ -32,6 +32,8 @@ public class WanderHook extends MovingEntityHook {
 
     private int time;
 
+    private Random rand = new Random();
+
     public WanderHook(MovingEntity entity) {
         this(entity, 60);
     }
@@ -49,7 +51,7 @@ public class WanderHook extends MovingEntityHook {
 
     @Override
     public boolean shouldExecute() {
-        if (entity.getLevel().rand.nextInt(chance) != 0)
+        if (rand.nextInt(chance) != 0)
             return false;
 
         target = findVector();
@@ -171,13 +173,13 @@ public class WanderHook extends MovingEntityHook {
     @Override
     public void startExecuting() {
         this.entity.setDirectTarget(EntityTarget.builder().target(this.target).identifier("wander").build());
-        this.time = (this.entity.level.rand.nextInt(8) + 7) * 20;
+        this.time = (rand.nextInt(8) + 7) * 20;
 //        startTick = this.entity.getServer().getTick();
 //        distance = Double.MAX_VALUE;
     }
 
     private Vector3 findVector() {
-        Random random = this.entity.level.rand;
+        Random random = rand;
         Vector3 base = this.entity.getRealTarget() != null ? this.entity.getTarget() : this.getEntity().getPosition();
 
         double r = random.nextDouble() * 360;

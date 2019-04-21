@@ -2,6 +2,7 @@ package me.onebone.actaeon.hook;
 
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.item.EntityXPOrb;
+import cn.nukkit.level.GameRule;
 import cn.nukkit.level.particle.HeartParticle;
 import cn.nukkit.math.AxisAlignedBB;
 import cn.nukkit.math.Vector3;
@@ -108,7 +109,7 @@ public class AnimalMateHook extends MovingEntityHook {
         baby.setGrowingAge(-24000);
         baby.spawnToAll();
 
-        Random random = this.animal.getLevel().rand;
+        Random random = new Random();
 
         for (int i = 0; i < 7; ++i) {
             double offsetX = random.nextDouble() * this.animal.getWidth() * 2 - this.animal.getWidth();
@@ -117,7 +118,7 @@ public class AnimalMateHook extends MovingEntityHook {
             this.animal.getLevel().addParticle(new HeartParticle(new Vector3(this.animal.getX() + offsetX, this.animal.getY() + offsetY, this.animal.getZ() + offsetZ)));
         }
 
-        if (this.animal.getLevel().getGameRules().getBoolean("doMobLoot")) {
+        if (this.animal.getLevel().getGameRules().getBoolean(GameRule.DO_MOB_LOOT)) {
             EntityXPOrb orb = (EntityXPOrb) Actaeon.create(EntityXPOrb.NETWORK_ID, animal);
             orb.setExp(random.nextInt(7) + 1);
 

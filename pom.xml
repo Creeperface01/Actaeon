@@ -9,13 +9,10 @@
 
   <repositories>
     <repository>
-      <id>regularbox</id>
-      <url>http://ci.regularbox.com/plugin/repository/everything/</url>
+      <id>nukkit-repo</id>
+      <url>https://repo.nukkitx.com/maven-snapshots</url>
     </repository>
   </repositories>
-
-  <name>Actaeon</name>
-  <url>https://github.com/onebone/Actaeon/</url>
 
   <properties>
     <project.build.number>SNAPSHOT</project.build.number>
